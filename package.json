@@ -1,0 +1,19 @@
+{
+  "name": "scrolling-yarrrr",
+  "version": "1.0.0",
+  "description": "Pirate in scrolling trouble.",
+  "author": "Webdevalex",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx webpack --config webpack.config.js",
+    "watch": "npx webpack --config webpack.config.js --watch"
+  },
+  "dependencies": {
+    "kaboom": "^0.5.1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^9.0.1",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2"
+  }
+}
