@@ -15,6 +15,7 @@ const title = () => {
 
   k.add([
     k.sprite("player"),
+    k.scale(2),
     {
       add() {
         this.play("idle");

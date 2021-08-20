@@ -15,9 +15,10 @@ const level = [
   "        ",
 ];
 
+let score = 0;
+
 const main = () => {
-  let lastBlockSpawn = 0;
-  let score = 0;
+  let lastBlockSpawn = 2;
 
   k.layers(["bg", "obj", "ui"], "obj");
 
@@ -49,7 +50,7 @@ const main = () => {
       frame: 28,
     }),
     k.pos(k.width() / 2, k.height() / 2),
-    k.scale(1),
+    k.scale(1.5),
     k.origin("center"),
     k.body(),
     "player",
@@ -57,7 +58,7 @@ const main = () => {
 
   player.action(() => {
     if (player.pos.y > k.height() + 64 || player.pos.y < -64) {
-      k.go("gameOver");
+      k.go("gameOver", Math.floor(score));
     }
   });
 
@@ -67,14 +68,18 @@ const main = () => {
   k.keyDown("left", function () {
     if (player.pos.x >= 8) {
       player.move(-120, 0);
-      player.scale.x = -1;
+      if (player.scale.x > 0) {
+        player.scale.x *= -1;
+      }
     }
   });
 
   k.keyDown("right", function () {
     if (player.pos.x <= k.width() - 8) {
       player.move(120, 0);
-      player.scale.x = 1;
+      if (player.scale.x < 0) {
+        player.scale.x *= -1;
+      }
     }
   });
 
@@ -121,17 +126,58 @@ const main = () => {
     lastBlockSpawn += k.dt();
     if (lastBlockSpawn > 2) {
       lastBlockSpawn = 0;
-      addBlock(Math.floor(Math.random() * 10) * 24, k.height());
+      addBlock((Math.floor(Math.random() * 8) + 1) * 24, k.height());
     }
   });
 };
 
-const addBlock = (x, y) => {
-  return k.add([
+const addBanana = (x, y) => {
+  k.add([
     k.sprite("tileset", {
+      frame: 233,
+    }),
+    k.pos(x, y - 20),
+    k.origin("center"),
+    k.body(),
+    "banana",
+    {
+      redeemed: false,
+      add() {
+        k.collides("player", "banana", (player, banana) => {
+          if (banana.redeemed === false) {
+            banana.redeemed = true;
+            score += 5;
+            banana.jump(300);
+            banana.play("banana", false);
+            k.wait(0.5, () => {
+              k.destroy(banana);
+            });
+          }
+        });
+      },
+    },
+  ]);
+};
+
+const addBlock = (x, y) => {
+  if (Math.random() > 0.6) {
+    addBanana(x, y);
+  }
+
+  k.add([
+    k.sprite("tileset_half", {
       frame: 1,
     }),
-    k.pos(x, y),
+    k.pos(x - 12, y),
+    k.origin("center"),
+    k.solid(),
+    "moving-block",
+  ]);
+  k.add([
+    k.sprite("tileset_half", {
+      frame: 1,
+    }),
+    k.pos(x + 12, y),
     k.origin("center"),
     k.solid(),
     "moving-block",
