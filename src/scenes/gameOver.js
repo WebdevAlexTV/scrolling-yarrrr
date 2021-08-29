@@ -21,7 +21,7 @@ const gameOver = (score) => {
   ]);
 
   addButton("Retry", k.vec2(k.width() / 2, k.height() / 2 + 40), () => {
-    k.go("main");
+    k.go("main", true);
   });
 };
 

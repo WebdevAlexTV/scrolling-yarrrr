@@ -5,33 +5,44 @@ const loadSprites = () => {
 
   k.loadSprite("background", "background.png");
 
-  k.loadSprite("tileset_half", "tileset2.png", {
-    sliceX: 28,
-    sliceY: 20,
+  k.loadSprite("wood", "wood.png", {
+    sliceX: 1,
+    sliceY: 1,
   });
 
-  k.loadSprite("tileset", "tileset2.png", {
-    sliceX: 28,
-    sliceY: 10,
-    anims: {
-      banana: {
-        from: 233,
-        to: 235,
-      },
-    },
+  k.loadSprite("spikes", "spikes.png", {
+    sliceX: 1,
+    sliceY: 1,
+  });
+
+  k.loadSprite("chalice", "chalice.png", {
+    sliceX: 1,
+    sliceY: 1,
   });
 
   k.loadSprite("player", "pirate.png", {
-    sliceX: 10,
+    sliceX: 27,
     sliceY: 1,
     anims: {
       idle: {
-        from: 0,
+        from: 1,
         to: 4,
       },
       run: {
-        from: 5,
+        from: 6,
         to: 9,
+      },
+      jump: {
+        from: 11,
+        to: 15,
+      },
+      fall: {
+        from: 17,
+        to: 18,
+      },
+      die: {
+        from: 20,
+        to: 26,
       },
     },
   });

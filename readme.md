@@ -6,7 +6,6 @@ Ihr könnt es hier ausprobieren:
 
 https://scrolling-yarrrr.surge.sh/
 
-## Verwendetes Sprite-Pack
+# Ideen
 
-https://stealthix.itch.io/rpg-beach-tileset
-https://karnificial.itch.io/western-or-pirate-tileset
+- Puzzles ?
